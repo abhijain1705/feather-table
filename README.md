@@ -1,4 +1,4 @@
-# FeatherTable 🪶  
+# ![FeatherTable 🪶](logo.png) FeatherTable 🪶
 
 A lightweight, dependency-free React table component designed for modern frontend applications.  
 Built completely from scratch — no UI libraries, no CSS frameworks, no dependency bloat.

@@ -122,7 +122,7 @@ See [LICENSE](LICENSE)
 ### 👨‍💻 Maintainer
 
 Built and maintained with ❤️ by Abhi (Abhij)
-Frontend Engineer • UI/UX Learner • Open Source Explorer
+Full Stack Engineer
 
 <div align="left"> <a href="https://github.com/abhijain1705" target="_blank"> <img src="https://github.com/abhijain1705.png" width="90" height="90" style="border-radius:50%;" /> </a> </div>
 

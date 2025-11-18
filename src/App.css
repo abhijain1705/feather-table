@@ -15,21 +15,21 @@
 }
 
 /* table style */
-.table-class {
+.ft-table {
     border-collapse: collapse;
     border: 1px solid var(--ft-border);
     background: var(--ft-bg);
     color: var(--ft-text);
 }
 
-.column-class {
+.ft-th {
     padding: var(--ft-padding-md);
     text-align: left;
     border: 1px solid var(--ft-border);
     background: var(--ft-header-bg);
 }
 
-.cell-class {
+.ft-td {
     border: 1px solid var(--ft-border);
     padding: var(--ft-padding-sm);
 }

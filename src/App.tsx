@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import Table from './table/table';
 import { generateData } from './dummy/generator';
+import Table from './table/table';
 import { PaginationType } from './types/type';
 
 /**

@@ -1,4 +1,5 @@
-import { FaChevronCircleLeft, FaChevronCircleRight } from "react-icons/fa";
+import FtChevronLeft from "../../icons/ftChevronLeft";
+import FtChevronRight from "../../icons/ftChevronRight";
 
 type PaginationProps = {
     pageIndex: number;
@@ -54,7 +55,7 @@ export default function ClassicPagination({
                     disabled={currentPage === 1}
                     onClick={() => onPageChange(currentPage - 2)}
                 >
-                    <FaChevronCircleLeft />
+                    <FtChevronLeft />
                 </button>
 
                 {/* Prefix */}
@@ -95,7 +96,7 @@ export default function ClassicPagination({
                     disabled={currentPage === pageCount}
                     onClick={() => onPageChange(currentPage)}
                 >
-                    <FaChevronCircleRight />
+                    <FtChevronRight />
                 </button>
             </div>
 

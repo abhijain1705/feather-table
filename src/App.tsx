@@ -48,7 +48,7 @@ function App() {
         onRowsPerPageChange={(value) => {
           setpagination({ pageIndex: pagination.pageIndex, pageSize: value })
         }}
-        paginationPlugin={PaginationType.classic}
+        paginationPlugin={PaginationType.table}
         totalRows={totalRows} />
     </div>
   )

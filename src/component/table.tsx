@@ -8,13 +8,13 @@ type Props = {
     data: Record<string, any>[];
 
     /** Pagination config: pageSize + pageIndex */
-    pagination?: { pageSize: number; pageIndex: number };
+    pagination: { pageSize: number; pageIndex: number };
 
     /** Total rows in dataset (important for server-side pagination) */
-    totalRows?: number;
+    totalRows: number;
 
     /** Called when user clicks next/prev/page number */
-    onPageChange?: (page: number) => void;
+    onPageChange: (page: number) => void;
 
     /** Page size dropdown options */
     rowsPerPage?: number[];
@@ -75,8 +75,8 @@ const Table = ({
      */
     const renderPagination = () => {
         const pluginProps = {
-            pageIndex: pagination?.pageIndex ?? 0,
-            pageSize: pagination?.pageSize ?? data.length,
+            pageIndex: pagination.pageIndex,
+            pageSize: pagination.pageSize,
             totalRows,
             rowsPerPage,
             onPageChange,

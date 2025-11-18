@@ -33,3 +33,77 @@
     border: 1px solid var(--ft-border);
     padding: var(--ft-padding-sm);
 }
+/* Root container */
+.ft-pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--ft-padding-sm) 0;
+    background: var(--ft-bg);
+    color: var(--ft-text);
+}
+
+/* Page numbers wrapper */
+.ft-pagination-body {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+/* Page numbers */
+.ft-page-number {
+    padding: 4px 10px;
+    background: var(--ft-bg);
+    color: var(--ft-text);
+    border: 1px solid var(--ft-border);
+    border-radius: var(--ft-radius);
+    cursor: pointer;
+    transition: var(--ft-transition, 0.2s ease);
+}
+
+.ft-page-number:hover {
+    background: var(--ft-header-bg);
+}
+
+.ft-page-number.ft-active {
+    background: var(--ft-text);
+    color: var(--ft-bg);
+    font-weight: bold;
+}
+
+/* Left/Right arrows */
+.ft-page-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--ft-text);
+}
+
+.ft-page-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+/* Ellipsis */
+.ft-ellipsis {
+    opacity: 0.6;
+    padding: 0 4px;
+}
+
+/* Rows per page selector */
+.ft-rows-select {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    gap: 0.4rem;
+    color: var(--ft-text);
+}
+
+.ft-select {
+    padding: 4px 6px;
+    border: 1px solid var(--ft-border);
+    border-radius: var(--ft-radius);
+    background: var(--ft-bg);
+    color: var(--ft-text);
+    cursor: pointer;
+}

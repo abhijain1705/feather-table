@@ -5,6 +5,8 @@ import ClassicPagination from "../plugin/pagination/classicPagination";
 import TablePagination from "../plugin/pagination/tablePagination";
 import { PaginationType } from "../types/type";
 
+type PaginationPosition = "top" | "bottom" | "both";
+
 type Props = {
     data: any[];
     pagination: { pageIndex: number; pageSize: number };
@@ -13,7 +15,11 @@ type Props = {
     rowsPerPage?: number[];
     onRowsPerPageChange?: (size: number) => void;
     paginationPlugin?: PaginationType;
+
+    /** NEW — position of pagination UI */
+    paginationPosition?: PaginationPosition;
 };
+
 
 export default function Table({
     data,
@@ -22,6 +28,7 @@ export default function Table({
     rowsPerPage,
     onPageChange,
     onRowsPerPageChange,
+    paginationPosition = "bottom",
     paginationPlugin = PaginationType.classic,
 }: Props) {
     const columns = useColumns(data);
@@ -51,6 +58,7 @@ export default function Table({
     return (
         <TableRenderer
             columns={columns}
+            paginationPosition={paginationPosition}
             rows={rows}
             paginationSlot={paginationSlot}
         />

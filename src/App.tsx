@@ -29,7 +29,7 @@ function App() {
 
   useEffect(() => {
     (() => {
-      const response = generateData(5000);
+      const response = generateData(1000000);
       setData(response);
       settotalRows(response.length);
     })()

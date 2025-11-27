@@ -1,6 +1,8 @@
+import { useState } from "react";
 import TableRenderer from "../core/TableRenderer";
 import { useColumns } from "../core/useColumns";
 import { usePagination } from "../core/usePagination";
+import { useSort } from "../core/useSort";
 import ClassicPagination from "../plugin/pagination/classicPagination";
 import TablePagination from "../plugin/pagination/tablePagination";
 import { PaginationType } from "../types/type";
@@ -33,8 +35,15 @@ export default function Table({
 }: Props) {
     const columns = useColumns(data);
 
-    const rows = usePagination({
+    const [sorting, setsorting] = useState<Record<string, "asc" | "desc">>({})
+
+    const sort = useSort({
         data,
+        sortBy: sorting, // Future: add sort state management
+    })
+
+    const rows = usePagination({
+        data: sort,
         pageIndex: pagination.pageIndex,
         pageSize: pagination.pageSize,
     });
@@ -60,6 +69,8 @@ export default function Table({
             columns={columns}
             paginationPosition={paginationPosition}
             rows={rows}
+            sorting={sorting}
+            setsorting={setsorting}
             paginationSlot={paginationSlot}
         />
     );

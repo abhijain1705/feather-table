@@ -4,6 +4,8 @@ import TableHead from "../table/TableHead";
 type Props = {
     columns: string[];
     rows: any[];
+    sorting: Record<string, "asc" | "desc">;
+    setsorting: React.Dispatch<React.SetStateAction<Record<string, "asc" | "desc">>>;
     paginationSlot?: React.ReactNode;
     paginationPosition: "top" | "bottom" | "both";
 };
@@ -11,6 +13,8 @@ type Props = {
 export default function TableRenderer({
     columns,
     rows,
+    setsorting,
+    sorting,
     paginationSlot,
     paginationPosition
 }: Props) {
@@ -25,7 +29,9 @@ export default function TableRenderer({
             )}
 
             <table className="ft-table">
-                <TableHead columns={columns} />
+                <TableHead columns={columns}
+                    sorting={sorting}
+                    setsorting={setsorting} />
                 <TableBody columns={columns} rows={rows} />
             </table>
 

@@ -5,8 +5,9 @@ export const useSort = ({
     sortBy,
 }: {
     data: any[];
-    sortBy: Record<string, "asc" | "desc">
+    sortBy: Record<string, string>
 }) => {
+
     return useMemo(() => {
         if (Object.keys(sortBy).length === 0) return data;
         const sortedData = [...data].sort((a, b) => {

@@ -1,11 +1,11 @@
+import FilterTray from "../table/filterTray";
 import TableBody from "../table/TableBody";
 import TableHead from "../table/TableHead";
+import type { FilterTrayProps } from "../types/type";
 
-type Props = {
+interface Props extends FilterTrayProps {
     columns: string[];
     rows: any[];
-    sorting: Record<string, "asc" | "desc">;
-    setsorting: React.Dispatch<React.SetStateAction<Record<string, "asc" | "desc">>>;
     paginationSlot?: React.ReactNode;
     paginationPosition: "top" | "bottom" | "both";
 };
@@ -14,7 +14,7 @@ export default function TableRenderer({
     columns,
     rows,
     setsorting,
-    sorting,
+    sorting, setVisibleColumns, visibleColumns, allColumns,
     paginationSlot,
     paginationPosition
 }: Props) {
@@ -28,10 +28,9 @@ export default function TableRenderer({
                 </div>
             )}
 
+            <FilterTray setsorting={setsorting} setVisibleColumns={setVisibleColumns} visibleColumns={visibleColumns} allColumns={allColumns} columns={columns} sorting={sorting} />
             <table className="ft-table">
-                <TableHead columns={columns}
-                    sorting={sorting}
-                    setsorting={setsorting} />
+                <TableHead columns={columns} />
                 <TableBody columns={columns} rows={rows} />
             </table>
 

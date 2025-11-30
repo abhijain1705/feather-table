@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import TableRenderer from "../core/TableRenderer";
 import { useColumns } from "../core/useColumns";
 import { usePagination } from "../core/usePagination";
@@ -33,9 +33,32 @@ export default function Table({
     paginationPosition = "bottom",
     paginationPlugin = PaginationType.classic,
 }: Props) {
-    const columns = useColumns(data);
+    const originalColumns = useColumns(data);
 
-    const [sorting, setsorting] = useState<Record<string, "asc" | "desc">>({})
+    const [visibleColumns, setVisibleColumns] = useState<Record<string, boolean>>({});
+
+    useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setVisibleColumns(() => {
+            return Object.fromEntries(originalColumns.map(c => [c, true]))
+        })
+    }, [originalColumns])
+
+    const mergedVisibleColumns = useMemo(() => {
+        const updated = { ...visibleColumns };
+
+        for (const col of originalColumns) {
+            if (!(col in updated)) {
+                updated[col] = true; // default visible
+            }
+        }
+
+        return updated;
+    }, [originalColumns, visibleColumns]);
+
+    const activeColumns = originalColumns.filter(col => mergedVisibleColumns[col]);
+
+    const [sorting, setsorting] = useState<Record<string, string>>({})
 
     const sort = useSort({
         data,
@@ -66,11 +89,14 @@ export default function Table({
 
     return (
         <TableRenderer
-            columns={columns}
             paginationPosition={paginationPosition}
             rows={rows}
             sorting={sorting}
             setsorting={setsorting}
+            columns={activeColumns}
+            allColumns={originalColumns}
+            visibleColumns={visibleColumns}
+            setVisibleColumns={setVisibleColumns}
             paginationSlot={paginationSlot}
         />
     );

@@ -14,6 +14,9 @@ type Props = {
     pagination: { pageIndex: number; pageSize: number };
     totalRows: number;
     onPageChange: (page: number) => void;
+    onResetFilter?: () => void;
+    onSortingChange?: (sortBy: Record<string, string>) => void;
+    clientSorting?: Record<string, string>;
     rowsPerPage?: number[];
     onRowsPerPageChange?: (size: number) => void;
     paginationPlugin?: PaginationType;
@@ -25,6 +28,9 @@ type Props = {
 
 export default function Table({
     data,
+    onResetFilter,
+    onSortingChange,
+    clientSorting,
     pagination,
     totalRows,
     rowsPerPage,
@@ -58,46 +64,53 @@ export default function Table({
 
     const activeColumns = originalColumns.filter(col => mergedVisibleColumns[col]);
 
-    const [sorting, setsorting] = useState<Record<string, string>>({})
+    const [sorting, setsorting] = useState<Record<string, string>>(clientSorting || {});
 
-    const sort = useSort({
-        data,
-        sortBy: sorting, // Future: add sort state management
-    })
+    useEffect(() => {
+        if (onSortingChange) {
+            onSortingChange(sorting);
+        }
+    }, [sorting, onSortingChange]);
 
-    const rows = usePagination({
-        data: sort,
-        pageIndex: pagination.pageIndex,
-        pageSize: pagination.pageSize,
-    });
+        const sort = useSort({
+            data,
+            sortBy: sorting, // Future: add sort state management
+        })
 
-    const paginationProps = {
-        pageIndex: pagination.pageIndex,
-        pageSize: pagination.pageSize,
-        totalRows,
-        rowsPerPage,
-        onPageChange,
-        onRowsPerPageChange,
-    };
+        const rows = usePagination({
+            data: sort,
+            pageIndex: pagination.pageIndex,
+            pageSize: pagination.pageSize,
+        });
 
-    const paginationSlot =
-        paginationPlugin === PaginationType.table ? (
-            <TablePagination {...paginationProps} />
-        ) : (
-            <ClassicPagination {...paginationProps} />
+        const paginationProps = {
+            pageIndex: pagination.pageIndex,
+            pageSize: pagination.pageSize,
+            totalRows,
+            rowsPerPage,
+            onPageChange,
+            onRowsPerPageChange,
+        };
+
+        const paginationSlot =
+            paginationPlugin === PaginationType.table ? (
+                <TablePagination {...paginationProps} />
+            ) : (
+                <ClassicPagination {...paginationProps} />
+            );
+
+        return (
+            <TableRenderer
+                paginationPosition={paginationPosition}
+                rows={rows}
+                sorting={sorting}
+                setsorting={setsorting}
+                columns={activeColumns}
+                onResetFilter={onResetFilter}
+                allColumns={originalColumns}
+                visibleColumns={visibleColumns}
+                setVisibleColumns={setVisibleColumns}
+                paginationSlot={paginationSlot}
+            />
         );
-
-    return (
-        <TableRenderer
-            paginationPosition={paginationPosition}
-            rows={rows}
-            sorting={sorting}
-            setsorting={setsorting}
-            columns={activeColumns}
-            allColumns={originalColumns}
-            visibleColumns={visibleColumns}
-            setVisibleColumns={setVisibleColumns}
-            paginationSlot={paginationSlot}
-        />
-    );
-}
+    }

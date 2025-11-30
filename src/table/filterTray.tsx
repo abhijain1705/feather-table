@@ -5,7 +5,7 @@ import FtReset from "../icons/ftReset"
 import type { FilterTrayProps } from "../types/type"
 
 
-const FilterTray = ({ sorting, setsorting, columns, setVisibleColumns, visibleColumns, allColumns }: FilterTrayProps) => {
+const FilterTray = ({ sorting, setsorting, columns, setVisibleColumns, onResetFilter, visibleColumns, allColumns }: FilterTrayProps) => {
 
     const [openColumnPop, setopenColumnPop] = useState(false)
 
@@ -78,6 +78,7 @@ const FilterTray = ({ sorting, setsorting, columns, setVisibleColumns, visibleCo
                 </button>
                 <button
                     onClick={() => {
+                        if (onResetFilter) onResetFilter();
                         setopenFilterPop(prev => !prev)
                         setopenColumnPop(false)
                     }}

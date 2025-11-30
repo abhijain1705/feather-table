@@ -13,6 +13,7 @@ interface Props extends FilterTrayProps {
 export default function TableRenderer({
     columns,
     rows,
+    onResetFilter,
     setsorting,
     sorting, setVisibleColumns, visibleColumns, allColumns,
     paginationSlot,
@@ -28,7 +29,7 @@ export default function TableRenderer({
                 </div>
             )}
 
-            <FilterTray setsorting={setsorting} setVisibleColumns={setVisibleColumns} visibleColumns={visibleColumns} allColumns={allColumns} columns={columns} sorting={sorting} />
+            <FilterTray setsorting={setsorting} onResetFilter={onResetFilter} setVisibleColumns={setVisibleColumns} visibleColumns={visibleColumns} allColumns={allColumns} columns={columns} sorting={sorting} />
             <table className="ft-table">
                 <TableHead columns={columns} />
                 <TableBody columns={columns} rows={rows} />
